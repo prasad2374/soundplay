@@ -17,10 +17,12 @@ jobs:
       - name: Run CVEarity Discovery Agent
         env:
           CVEARITY_API_URL: ${{ github.event.client_payload.api_url }}
+          CVEARITY_JWT: ${{ github.event.client_payload.jwt }}
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/workspace \
             -e CVEARITY_API_URL \
+            -e CVEARITY_JWT \
             prasad2374/cvearitybom:latest \
             --type sbom \
             --scan-id ${{ github.event.client_payload.scan_id }} \
